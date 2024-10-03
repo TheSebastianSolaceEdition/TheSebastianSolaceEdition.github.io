@@ -1,2 +1,2 @@
-# [The Sebastian-Solace Edition.](TheSebastianSolaceEdition.github.io)
-The Sebastian-Solace Edition.
+# [The Solace Edition.](TheSebastianSolaceEdition.github.io)
+The Solace Edition.
