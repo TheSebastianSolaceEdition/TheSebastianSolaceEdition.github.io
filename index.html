@@ -218,6 +218,7 @@ button:active {
                     <li><a href="#" onclick="showTab('games')">Games</a></li>
                     <li><a href="#" onclick="showTab('apps')">Apps</a></li>
                     <li><a href="#" onclick="showTab('credits')">Credits</a></li>
+                    <li><a href="#" onclick="showTab('UL')">Update Log</a></li>
                     <li><a href="#" onclick="showTab('settings')">Settings</a></li>
                 </ul>
             </nav>
@@ -240,7 +241,7 @@ button:active {
                 <div class="game">
                     <a href="/Games/FNAW"><strong>Five Nights at Winston</strong></a>
                     <p>You experience in an office full of creatures in a school. Your only job is to be on night watch.</p> 
-                    <a href="/Games/CookieClicker"><strong>Cookie Clicker</strong></a>
+                    <a href="https://mr-sebby.github.io/cookie/"><strong>Cookie Clicker</strong></a>
                     <p>You make a cookie and upgrade it to get more and... that's all I guess, or is it?</p>
                 </div>
             </div>
@@ -260,7 +261,7 @@ button:active {
                     <p>William87 - Description Writer.</p>
                 </div>
             </div>
-            <div id="credits" class="tab-content">
+            <div id="UL" class="tab-content">
                 <h2 class="dynamic-color">Update Log</h2>
                 <div class="app">
                     <p>10.9.2024 | Games, And UI</p>
@@ -273,10 +274,13 @@ button:active {
                 <div class="settings-container">
                     <label for="color-picker">Main Color:</label>
                     <input type="color" id="color-picker" value="#4a90e2">
-                    <button id="save-settings">Save Settings</button>
-                    <button id="reset-settings">Reset Settings</button>
+
                     <label for="theme-toggle">Dark Theme:</label>
                     <input type="checkbox" id="theme-toggle" class="toggle-checkbox" checked>
+
+                    <button id="save-settings">Save Settings</button>
+
+                    <button id="reset-settings">Reset Settings</button>
                 </div>
             </div>
         </main>
