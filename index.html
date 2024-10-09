@@ -7,122 +7,228 @@
     <link rel="icon" href="icon.png" type="image/png"> <!-- Favicon -->
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Ensures the body takes up the full viewport height */
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #121212; /* Dark background */
-            color: #e0e0e0; /* Light text color */
-            overflow: hidden; /* Prevents scrolling */
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Dark background (default) */
+    color: #e0e0e0; /* Light text color */
+    overflow: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth theme transition */
+}
 
-        .container {
-            max-width: 800px;
-            padding: 20px;
-            z-index: 10; /* Ensure it appears above particles */
-            backdrop-filter: blur(10px); /* Adds a frosted glass effect */
-            border-radius: 10px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Optional: Center the content inside the container */
-        }
+.container {
+    max-width: 800px;
+    padding: 20px;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: pulse 5s infinite ease-in-out; /* Default breathing animation */
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        h1 {
-            color: #4a90e2;
-            text-shadow: 0 0 10px rgba(74, 144, 226, 0.8); /* Light glow effect */
-        }
+h1, h2 {
+    color: #4a90e2;
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.8); /* Static glow effect */
+}
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
+nav ul {
+    list-style: none;
+    padding: 0;
+}
 
-        nav li {
-            display: inline;
-            margin: 0 15px;
-        }
+nav li {
+    display: inline;
+    margin: 0 15px;
+    position: relative; /* For underline effect */
+}
 
-        nav a {
-            text-decoration: none;
-            color: #e0e0e0;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+nav a {
+    text-decoration: none;
+    color: #e0e0e0; /* Default white color for links */
+    font-weight: bold;
+    transition: color 0.3s;
+}
 
-        nav a:hover, nav a.active {
-            color: #4a90e2;
-            text-shadow: 0 0 5px rgba(74, 144, 226, 0.8);
-        }
+nav a:hover,
+nav a.active {
+    color: #4a90e2; /* Highlight color on hover and active */
+    text-shadow: 0 0 5px rgba(74, 144, 226, 0.8);
+}
 
-        .tab-content {
-            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
-            width: 93.4%; /* Takes full width of the container */
-        }
+nav a::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 0;
+    background: #4a90e2;
+    transition: width 0.3s;
+    position: absolute;
+    left: 50%;
+    bottom: -5px; /* Adjust position as necessary */
+    transform: translateX(-50%);
+}
 
-        h2 {
-            color: #4a90e2;
-        }
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
 
-        .game, .app {
-            margin: 10px 0;
-        }
+.tab-content {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+    width: 93.4%;
+    display: none;
+}
 
-        .game a, .app a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+.dynamic-text {
+    font-size: 1.2rem;
+    color: #4a90e2;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #4a90e2;
+    animation: blink-caret 1s step-end infinite;
+}
 
-        .game a:hover, .app a:hover {
-            color: #4a90e2;
-            text-shadow: 0 0 5px rgba(74, 144, 226, 0.8);
-        }
+@keyframes blink-caret {
+    50% {
+        border-color: transparent;
+    }
+}
 
-        #particles-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Behind the content */
-        }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.settings-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.light-theme {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+.light-theme .container {
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.5);
+}
+
+.light-theme nav a {
+    color: #121212; /* Dark text color in light theme */
+}
+
+.light-theme nav a:hover,
+.light-theme nav a.active {
+    color: #4a90e2; /* Highlight color on hover and active in light theme */
+}
+
+.toggle-checkbox {
+    margin-left: 10px;
+}
+
+#particles-js {
+    position: fixed; /* Cover the whole viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Use viewport width */
+    height: 100vh; /* Use viewport height */
+    z-index: 1; /* Behind the content */
+}
+
+#color-picker {
+    margin-top: 10px;
+    border: none;
+    outline: none;
+}
+
+button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s; /* Add transform for scaling */
+}
+
+button:hover {
+    background-color: #357ABD; /* Darker shade for hover effect */
+    transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+button:active {
+    transform: scale(0.95); /* Shrink on click */
+}
+
+/* Additional styles for links in Games and Apps */
+.game a,
+.app a {
+    color: inherit; /* Inherit the color from the body (white in dark theme) */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.game a:hover,
+.app a:hover {
+    color: #4a90e2; /* Change to highlight color on hover */
+}
+
+/* Light theme styles for game and app links */
+.light-theme .game a,
+.light-theme .app a {
+    color: #121212; /* Dark color for links in light theme */
+}
+
+.light-theme .game a:hover,
+.light-theme .app a:hover {
+    color: #4a90e2; /* Change to highlight color on hover in light theme */
+}
+
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
     <div class="container">
         <header>
-            <h1>The Sebastian Solace Edition</h1>
+            <h1 class="dynamic-color">The Sebastian Solace Edition</h1>
             <nav>
                 <ul>
                     <li><a href="#" class="active" onclick="showTab('home')">Home</a></li>
                     <li><a href="#" onclick="showTab('games')">Games</a></li>
                     <li><a href="#" onclick="showTab('apps')">Apps</a></li>
                     <li><a href="#" onclick="showTab('credits')">Credits</a></li>
+                    <li><a href="#" onclick="showTab('settings')">Settings</a></li>
                 </ul>
             </nav>
         </header>
         
         <main>
-            <div id="home" class="tab-content" style="display: none;">
-                <h2>Home</h2>
+            <div id="home" class="tab-content active">
+                <h2 class="dynamic-color">Home</h2>
                 <div class="app">
                     <p>Welcome to The Sebastian-Solace Edition! (Shorter for The Solace Edition)</p>
-                    <p>This is a Solo project. Come to Talk to me on Discord!</p>
+                    <p>This is a group project. Come talk to me on Discord!</p>
                     <p>Discord: Pestt.</p>
                     <p>Github: Infin_ix</p>
                     <p></p>
@@ -130,89 +236,210 @@
                 </div>
             </div>
             <div id="games" class="tab-content">
-                <h2>Games</h2>
+                <h2 class="dynamic-color">Games</h2>
                 <div class="game">
                     <a href="/Games/FNAW"><strong>Five Nights at Winston</strong></a>
-                    <p>You experience in an office full of creatures in a school, Your only job is to be on night watch.</p> 
+                    <p>You experience in an office full of creatures in a school. Your only job is to be on night watch.</p> 
                     <a href="/Games/CookieClicker"><strong>Cookie Clicker</strong></a>
-                    <p>you make a cookie and upgrade it to get more and... that's all I guess or is it?.</p>
+                    <p>You make a cookie and upgrade it to get more and... that's all I guess, or is it?</p>
                 </div>
             </div>
-            <div id="apps" class="tab-content" style="display: none;">
-                <h2>Apps</h2>
+            <div id="apps" class="tab-content">
+                <h2 class="dynamic-color">Apps</h2>
                 <div class="app">
                     <a href="/Apps/Discord"><strong>Discord</strong></a>
                     <p>Connect with friends and communities on Discord.</p>
                     <a href="/Apps/Youtube"><strong>Youtube (Broken)</strong></a>
-                    <p>Watch Videos on Youtube. watch skibidi toilet cause why not!!! merwp :3</p>
+                    <p>Watch videos on Youtube. Watch skibidi toilet because why not!!! merwp :3</p>
                 </div>
             </div>
-            <div id="credits" class="tab-content" style="display: none;">
-                <h2>Credits</h2>
+            <div id="credits" class="tab-content">
+                <h2 class="dynamic-color">Credits</h2>
                 <div class="app">
-                    <p>Infin_ix/Sebastian - Owner/Main Developer.</p>
-                    <p>ChatGPT - HTML and CSS and JS for the Main Part of the Site.</p>
-                    <p>william84 - Description Writer.</p>
+                    <p>Infin_ix/Sebastian - Creator and Developer</p>
+                    <p>Seabass - Discord Bot Developer.</p>
+                </div>
+            </div>
+            <div id="settings" class="tab-content">
+                <h2 class="dynamic-color">Settings</h2>
+                <div class="settings-container">
+                    <label for="color-picker">Main Color:</label>
+                    <input type="color" id="color-picker" value="#4a90e2">
+                    <button id="save-settings">Save Settings</button>
+                    <button id="reset-settings">Reset Settings</button>
+                    <label for="theme-toggle">Dark Theme:</label>
+                    <input type="checkbox" id="theme-toggle" class="toggle-checkbox" checked>
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js configuration
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 120, density: { enable: true, value_area: 800 } },
-                color: { value: "#4a90e2" },
-                shape: {
-                    type: "circle",
-                    stroke: { width: 0, color: "#000000" },
-                    polygon: { nb_sides: 5 },
-                },
-                opacity: { value: 0.5, random: false, anim: { enable: false } },
-                size: { value: 5, random: true, anim: { enable: false } },
-                line_linked: { enable: true, distance: 150, color: "#4a90e2", opacity: 0.4, width: 2 },
-                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false } }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "repulse" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                },
-                modes: {
-                    grab: { distance: 400, line_linked: { opacity: 1 } },
-                    bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-                    repulse: { distance: 200, duration: 0.4 },
-                    push: { particles_nb: 4 },
-                    remove: { particles_nb: 2 }
-                }
-            },
-            retina_detect: true
-        });
-
-        // Tab functionality
-        function showTab(tabName) {
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => {
-                tab.style.display = 'none'; // Hide all tabs
-            });
-
-            document.getElementById(tabName).style.display = 'block'; // Show the selected tab
-
-            // Update the active link
-            const links = document.querySelectorAll('nav a');
-            links.forEach(link => {
-                link.classList.remove('active');
-            });
-            const activeLink = document.querySelector(`nav a[onclick="showTab('${tabName}')"]`);
-            activeLink.classList.add('active');
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 864e5).toUTCString();
+            document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
         }
 
-        // Show the games tab by default
+        // Function to get a cookie
+        function getCookie(name) {
+            return document.cookie.split('; ').reduce((r, v) => {
+                const parts = v.split('=');
+                return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+            }, '');
+        }
+
+        // Load settings from cookies
+        function loadSettings() {
+            const savedColor = getCookie('mainColor') || "#4a90e2"; // Default color if cookie is not found
+            const isDarkTheme = getCookie('theme') === 'true'; // Check if the dark theme is saved
+
+            document.getElementById('color-picker').value = savedColor; // Set the color picker to saved color
+            document.getElementById('theme-toggle').checked = isDarkTheme; // Set the theme toggle to saved theme
+
+            // Change text colors dynamically
+            document.querySelectorAll('.dynamic-color').forEach(element => {
+                element.style.color = savedColor; // Update text color
+                element.style.textShadow = `0 0 10px ${savedColor}`; // Update text shadow for glow effect
+            });
+
+            // Apply theme
+            applyTheme(isDarkTheme);
+        }
+
+        // Function to apply theme
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.body.classList.remove('light-theme');
+                document.body.style.backgroundColor = '#121212'; // Dark background
+                document.body.style.color = '#e0e0e0'; // Light text color
+            } else {
+                document.body.classList.add('light-theme');
+                document.body.style.backgroundColor = '#ffffff'; // Light background
+                document.body.style.color = '#121212'; // Dark text color
+            }
+        }
+
+        // Initialize with saved settings or default color
+        loadSettings();
+
+        // Show specific tab
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+
+            // Remove 'active' class from all links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show the selected tab and set it active
+            document.getElementById(tabName).style.display = 'block';
+            document.querySelector(`nav a[onclick*="${tabName}"]`).classList.add('active');
+        }
+
+        // Load home tab by default
         showTab('home');
+
+        // Save settings when button is clicked
+        document.getElementById('save-settings').addEventListener('click', function() {
+            const newColor = document.getElementById('color-picker').value; // Get the selected color
+            setCookie('mainColor', newColor, 30); // Save color in cookies for 30 days
+            setCookie('theme', document.getElementById('theme-toggle').checked, 30); // Save theme in cookies for 30 days
+
+            // Update text colors dynamically
+            document.querySelectorAll('.dynamic-color').forEach(element => {
+                element.style.color = newColor; // Update text color
+                element.style.textShadow = `0 0 10px ${newColor}`; // Update text shadow for glow effect
+            });
+
+            // Apply theme
+            applyTheme(document.getElementById('theme-toggle').checked);
+
+            alert('Settings saved!'); // Notify user
+        });
+
+        // Reset settings to defaults when button is clicked
+        document.getElementById('reset-settings').addEventListener('click', function() {
+            setCookie('mainColor', "#4a90e2", 30); // Reset color to default in cookies
+            setCookie('theme', 'true', 30); // Reset theme to dark in cookies
+            loadSettings(); // Load the default settings
+            alert('Settings reset to default!'); // Notify user
+        });
+
+        // Theme toggle event listener
+        document.getElementById('theme-toggle').addEventListener('change', function() {
+            const isDarkTheme = this.checked;
+            applyTheme(isDarkTheme); // Apply selected theme
+            setCookie('theme', isDarkTheme, 30); // Save theme preference in cookies
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        function initializeParticles(color) {
+            particlesJS("particles-js", {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: color }, // Use the selected color for particles
+                    shape: {
+                        type: "circle",
+                        stroke: { width: 0, color: "#000000" },
+                        polygon: { nb_sides: 5 },
+                        image: { src: "img/github.svg", width: 100, height: 100 }
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false,
+                        anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 5,
+                        random: true,
+                        anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: color, // Use the selected color for line links
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 6,
+                        direction: "none",
+                        random: false,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 400, line_linked: { opacity: 1 } },
+                        bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+                        repulse: { distance: 200, duration: 0.4 },
+                        push: { particles_nb: 4 },
+                        remove: { particles_nb: 2 }
+                    }
+                },
+                retina_detect: true
+            });
+        }
+
+        // Initialize with saved settings or default color
+        const initialColor = getCookie('mainColor') || "#4a90e2";
+        initializeParticles(initialColor); // Initialize particles with the default or saved color
     </script>
 </body>
 </html>
