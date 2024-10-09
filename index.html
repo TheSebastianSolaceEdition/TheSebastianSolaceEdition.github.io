@@ -214,12 +214,12 @@ button:active {
             <h1 class="dynamic-color">The Sebastian Solace Edition</h1>
             <nav>
                 <ul>
-                    <li><a href="#" class="dynamic-color" class="active" onclick="showTab('home')">Home</a></li>
-                    <li><a href="#" class="dynamic-color" onclick="showTab('games')">Games</a></li>
-                    <li><a href="#" class="dynamic-color" onclick="showTab('apps')">Apps</a></li>
-                    <li><a href="#" class="dynamic-color" onclick="showTab('credits')">Credits</a></li>
-                    <li><a href="#" class="dynamic-color" onclick="showTab('UL')">Update Log</a></li>
-                    <li><a href="#" class="dynamic-color" onclick="showTab('settings')">Settings</a></li>
+                    <li><a href="#" class="active" onclick="showTab('home')">Home</a></li>
+                    <li><a href="#" onclick="showTab('games')">Games</a></li>
+                    <li><a href="#" onclick="showTab('apps')">Apps</a></li>
+                    <li><a href="#" onclick="showTab('credits')">Credits</a></li>
+                    <li><a href="#" onclick="showTab('UL')">Update Log</a></li>
+                    <li><a href="#" onclick="showTab('settings')">Settings</a></li>
                 </ul>
             </nav>
         </header>
@@ -311,6 +311,10 @@ button:active {
 
             // Change text colors dynamically
             document.querySelectorAll('.dynamic-color').forEach(element => {
+                element.style.color = savedColor; // Update text color
+                element.style.textShadow = `0 0 10px ${savedColor}`; // Update text shadow for glow effect
+            });
+            document.querySelectorAll('.active').forEach(element => {
                 element.style.color = savedColor; // Update text color
                 element.style.textShadow = `0 0 10px ${savedColor}`; // Update text shadow for glow effect
             });
